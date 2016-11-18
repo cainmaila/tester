@@ -1,0 +1,18 @@
+{
+  "name": "tester",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/cainmaila/tester.git",
+    "type": "git"
+  },
+  "author": "Cain.Chu <cainmaila@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "method-override": "^2.3.6",
+    "multer": "^1.2.0"
+  }
+}
