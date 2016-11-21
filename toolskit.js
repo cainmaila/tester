@@ -2,8 +2,16 @@
 var crypto = require('crypto');
 var useragent = require('useragent');
 
+function getEncrypt(str, dsKey) {
+    var cipher = crypto.createCipheriv('des-ede3', new Buffer(dsKey), new Buffer(0));
+    var encrypted = cipher.update(str, 'utf8', 'base64');
+    encrypted += cipher.final('base64');
+    return encrypted;
+}
+exports.getEncrypt = getEncrypt;
+
 /**
- * des-ede3加密
+ * des-ede3解密
  * @param  {String} tkn   Tokens
  * @param  {String} dsKey Key
  * @return {String}       加密結果
