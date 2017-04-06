@@ -1,92 +1,52 @@
-/**
- * @file
- * API服務器入口
- * @requires express
- * @requires file-server.js
- * @todo    Express服務入口
- * @todo    Express錯誤處理
- */
-'use strict';
-var path = require('path');
-var express = require('express');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var multer = require('multer');
-var uploadPath = path.join(__dirname, '..', 'upload'),
-    upload = multer({ dest: uploadPath }),
-    cpUpFile = upload.fields([{ name: 'aa', maxCount: 1 }]);
-/**
- * Express PORT
- * @global
- * @type {Number}
- * @default 80
- */
-var port = 80;
-
-/**
- * express實例
- * @type {express}
- */
-var app = express();
-app.use(methodOverride());
-app.use(compression());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-
-app.post('/fp', function(req, res) {
-    cpUpFile(req, res, function(err) {
-        var aa = req.files['aa'][0].path;
-        console.log(aa);
-        res.send(aa);
+const debug = require('debug')
+const log = debug('log')
+const logi = debug('info')
+const err = debug('error')
+const logg = debug('nowshow')
+const express = require('express')
+const bodyParser = require('body-parser')
+const multer = require('multer')
+const fs = require('fs')
+const rp = require('request-promise')
+var mime = require('mime')
+const upload = multer({ dest: 'uploads/' })
+const app = express()
+const filePath = 'lemu.jpg'
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.post('/from', upload.single('fp1'), (req, res) => {
+    logg('req.file', req.file)
+    logi('req.body', req.body)
+    res.json(true)
+    process.exit()
+})
+app.get('/', upload.single('fp1'), (req, res) => {
+    logi('post fromData..')
+    fs.readFile(filePath, (err, data) => {
+        log('err, data', err, data)
+        data ? postFormData(data, mime.lookup(filePath)) : ''
     })
+    res.json(true)
+})
+app.listen(80, () => log('Server run in 80 port !!'))
 
-});
+rp.get('http://127.0.0.1')
+    .then(resData => log('resData', resData))
+    .catch(error => err('rp.get', err))
 
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-app.use(status404);
-app.listen(port, function() {
-    console.log('runing Oview API Server in ' + port + ' port...');
-});
-
-/**
- * 錯誤輸出
- */
-function logErrors(err, req, res, next) {
-    console.error(err.stack);
-    next(err);
-}
-
-/**
- * 500錯誤
- */
-function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        res.status(500).send({
-            error: 'Something failed!'
-        });
-    } else {
-        next(err);
+function postFormData(buf, mime) {
+    logi('postFormData', buf)
+    let formData = {
+        fp1: {
+            value: buf,
+            options: {
+                filename: 'xxx',
+                contentType: mime
+            }
+        },
+        name: 'cain'
     }
-}
-
-/**
- * 500錯誤
- */
-function errorHandler(err, req, res, next) {
-    res.status(500);
-    res.render('error', {
-        error: err
-    });
-}
-
-/**
- * 404錯誤
- */
-function status404(req, res) {
-    res.status(404).send('404 error');
+    rp.post('http://127.0.0.1/from', { formData: formData })
+        .then(resData => log('/from', resData))
+        .catch(error => err('/from', err))
 }

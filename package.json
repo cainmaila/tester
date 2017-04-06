@@ -1,18 +1,14 @@
 {
-  "name": "tester",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": {
-    "url": "https://github.com/cainmaila/tester.git",
-    "type": "git"
-  },
-  "author": "Cain.Chu <cainmaila@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "compression": "^1.6.2",
-    "express": "^4.14.0",
-    "method-override": "^2.3.6",
-    "multer": "^1.2.0"
-  }
+    "dependencies": {
+        "body-parser": "^1.17.1",
+        "debug": "^2.6.3",
+        "express": "^4.15.2",
+        "mine": "^0.1.0",
+        "multer": "^1.3.0",
+        "request": "^2.81.0",
+        "request-promise": "^4.2.0"
+    },
+    "scripts": {
+        "dev": "set DEBUG=log,info,error,nowshow&&node app.js"
+    }
 }
