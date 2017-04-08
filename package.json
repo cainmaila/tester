@@ -1,0 +1,11 @@
+{
+  "name": "tester",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/cainmaila/tester.git",
+  "author": "Cain Chu <cainmaila@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
