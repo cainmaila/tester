@@ -1,0 +1,17 @@
+{
+  "name": "tester",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/cainmaila/tester.git",
+    "type": "git"
+  },
+  "scripts": {
+    "log": "set DEBUG=log&node app.js"
+  },
+  "author": "CainChu <cain@cainplay.com>",
+  "license": "MIT",
+  "dependencies": {
+    "log4js": "^1.1.1"
+  }
+}
