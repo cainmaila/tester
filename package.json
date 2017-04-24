@@ -9,6 +9,7 @@
   "author": "CainChu <cain@cainplay.com>",
   "license": "MIT",
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "unzip": "^0.1.11"
   }
 }
