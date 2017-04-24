@@ -1,0 +1,14 @@
+{
+  "name": "tester",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/cainmaila/tester.git",
+    "type": "git"
+  },
+  "author": "CainChu <cain@cainplay.com>",
+  "license": "MIT",
+  "dependencies": {
+    "unzip": "^0.1.11"
+  }
+}
