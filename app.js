@@ -1,13 +1,8 @@
-const Lazy = require('lazy.js');
-const people = [
-    { lastName: 'aaaa' },
-    { lastName: 'ccc' },
-    { lastName: 'Smith' },
-]
-var result = Lazy(people)
-    .find(function(name) {
-        return name.lastName === 'Smith'
-    })
-result.aaa = 33
+const logPlugin = require('log-plugin')
+logPlugin.init(['ffMpegToolKit'])
+logPlugin.setLogLv('ffMpegToolKit', 'all')
+const ffMpegToolKit = require('./ffMpegToolKit.js')
 
-console.log(people);
+ffMpegToolKit.h360ToMp4('30fps', 'zoom/%03d.jpg')
+    .then(console.log)
+    .catch(console.error)
