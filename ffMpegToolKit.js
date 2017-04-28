@@ -30,18 +30,18 @@ module.exports = {
                 .inputFPS(30)
                 .withSize('720x480')
                 .autopad()
-                .on('start', function (commandLine) {
+                .on('start', function(commandLine) {
                     log('Spawned Ffmpeg with command: ' + commandLine)
                 })
-                .on('error', function (err) {
+                .on('error', function(err) {
                     loge('An error occurred: ' + err.message)
                     reject(err)
                 })
-                .on('end', function () {
+                .on('end', function() {
                     log('Merging finished !')
-                    resolve('pcx/' + zipkey + '.mp4')
+                    resolve(zipkey + '.mp4')
                 })
-                .save('pcx/' + zipkey + '.mp4')
+                .save(zipkey + '.mp4')
         })
     },
 
@@ -59,14 +59,14 @@ module.exports = {
         }
         return new Promise((resolve, reject) => {
             ffmpegCom
-                .on('start', function (commandLine) {
+                .on('start', function(commandLine) {
                     log('Spawned Ffmpeg with command: ' + commandLine)
                 })
-                .on('error', function (err) {
+                .on('error', function(err) {
                     loge('An error occurred: ' + err.message)
                     reject(err)
                 })
-                .on('end', function () {
+                .on('end', function() {
                     log('Merging finished !')
                     resolve('pcx/' + fileName)
                 })
